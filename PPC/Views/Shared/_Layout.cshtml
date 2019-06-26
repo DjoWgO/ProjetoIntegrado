@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - PPC WEB</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/toastr")
+    @Styles.Render("~/Content/select2")
+    @Scripts.Render("~/Content/datatables")
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("PPC WEB", "Pesquisar", "Professor", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Professor", "Pesquisar", "Professor")</li>
+                    <li>@Html.ActionLink("Curso", "Pesquisar", "Curso")</li>
+                    <li>@Html.ActionLink("Disciplina", "Cadastrar", "Disciplina")</li>
+                    <li>@Html.ActionLink("Projeto Pedagógico", "Pesquisar", "ProjetoPedagogico")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer></footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/vue")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/select2")
+    @Scripts.Render("~/bundles/datatables")
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $('.cpf').mask('000.000.000-00', { reverse: true, placeholder: "___.___.___-__" });
+            $('.mydate').mask('00/00/0000', { placeholder: "__/__/____" });
+
+            $('.myselect').select2();
+        });
+
+        function initDatatables() {
+            var dt = $('.customTable').DataTable({
+                searching: true,
+                ordering: false,
+                "bLengthChange": false,
+                "oLanguage": {
+                    "sUrl": "/Scripts/datatables.language.ptbr.json"
+                }
+            });
+
+
+            $('#mypesquisa').keyup(function () {
+                dt.search($(this).val()).draw();
+            })
+        }
+
+        $.fn.select2.defaults.set("theme", "bootstrap");
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+F:\Projetos\IESB\PPC.Entities\bin\Debug\PPC.Entities.dll
+F:\Projetos\IESB\PPC.Entities\bin\Debug\PPC.Entities.pdb
+F:\Projetos\IESB\PPC.Entities\obj\Debug\PPC.Entities.csproj.CoreCompileInputs.cache
+F:\Projetos\IESB\PPC.Entities\obj\Debug\PPC.Entities.dll
+F:\Projetos\IESB\PPC.Entities\obj\Debug\PPC.Entities.pdb
+F:\Projetos\IESB\PPC.Entities\bin\Debug\EntityFramework.dll
+F:\Projetos\IESB\PPC.Entities\bin\Debug\EntityFramework.SqlServer.dll
+F:\Projetos\IESB\PPC.Entities\bin\Debug\EntityFramework.xml
+F:\Projetos\IESB\PPC.Entities\bin\Debug\EntityFramework.SqlServer.xml
+F:\Projetos\IESB\PPC.Entities\obj\Debug\PPC.Entities.csprojAssemblyReference.cache
+F:\Projetos\IESB\PPC.Entities\obj\Debug\PPC.Entities.csproj.CopyComplete

@@ -1,0 +1,14 @@
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Domain.dll
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Domain.pdb
+F:\Projetos\IESB\PPC.Domain\obj\Debug\PPC.Domain.csprojAssemblyReference.cache
+F:\Projetos\IESB\PPC.Domain\obj\Debug\PPC.Domain.csproj.CoreCompileInputs.cache
+F:\Projetos\IESB\PPC.Domain\obj\Debug\PPC.Domain.dll
+F:\Projetos\IESB\PPC.Domain\obj\Debug\PPC.Domain.pdb
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Entities.dll
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Entities.pdb
+F:\Projetos\IESB\PPC.Domain\obj\Debug\PPC.Domain.csproj.CopyComplete
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Data.dll
+F:\Projetos\IESB\PPC.Domain\bin\Debug\EntityFramework.dll
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Data.pdb
+F:\Projetos\IESB\PPC.Domain\bin\Debug\PPC.Data.dll.config
+F:\Projetos\IESB\PPC.Domain\bin\Debug\EntityFramework.xml

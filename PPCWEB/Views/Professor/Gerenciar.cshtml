@@ -1,0 +1,277 @@
+﻿
+@{
+    ViewBag.Title = "Gerenciar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+
+    <script src="~/Scripts/professor/professorRepository.js"></script>
+    <script src="~/Scripts/professor/professorGerenciar.js"></script>
+}
+
+<script>
+        var idProfessor = @ViewBag.ProfessorId;
+</script>
+
+<div class="row" id="app-professor">
+    <div class="col-md-12">
+        <h3>Atuação IES</h3>
+    </div>
+    <div class="col-md-12">
+        <div class="pull-right" style="margin-top: 10px;">
+            <button class="btn btn-success" v-on:click="salvar">Salvar Alterações</button>
+        </div>
+        <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#geral">Geral</a></li>
+            <li><a data-toggle="pill" href="#atuacao-profissional">Atuação Profissional</a></li>
+            <li><a data-toggle="pill" href="#publicacoes">Publicações</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="geral" class="tab-pane fade in active">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Matrícula</label>
+                            <input type="text" name="matricula" class="form-control" v-model="professor.Matricula" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Data de Admissão</label>
+                            <input type="text" name="dataAdminissao" class="form-control mydate" v-model.lazy="professor.DataAdminissao" />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h4>Informe a quantidade de horas das atividades</h4>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="horasNDE" class="form-control" v-model.lazy="professor.HorasNDE" style="max-width: 70px; margin-right: 5px;" /> Horas NDE
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="extraClasseCurso" class="form-control" v-model.lazy="professor.ExtraClasseCurso" style="max-width: 70px; margin-right: 5px;" /> Atividade Extra Classe no curso
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="orientacaoTCC" class="form-control" v-model.lazy="professor.OrientacaoTCC" style="max-width: 70px; margin-right: 5px;" /> Orientação TCC
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="extraClasseOutrosCursos" class="form-control" v-model.lazy="professor.ExtraClasseOutrosCursos" style="max-width: 70px; margin-right: 5px;" /> Atividade Extra Classe outros cursos
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="coordenacaoCurso" class="form-control" v-model.lazy="professor.CoordenacaoCurso" style="max-width: 70px; margin-right: 5px;" /> Coordenação curso
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="qtdeHorasCurso" class="form-control" v-model.lazy="professor.QtdeHorasCurso" style="max-width: 70px; margin-right: 5px;" /> Qtde de horas curso
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="coordenacaoOutrosCursos" class="form-control" v-model.lazy="professor.CoordenacaoOutrosCursos" style="max-width: 70px; margin-right: 5px;" /> Coordenação outros cursos
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="qtdeHorasOutrosCursos" class="form-control" v-model.lazy="professor.QtdeHorasOutrosCursos" style="max-width: 70px; margin-right: 5px;" /> Qtde de horas outros cursos
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 5px;">
+                        <div class="form-inline">
+                            <input type="text" name="pesquisaSemestreAtual" class="form-control" v-model.lazy="professor.PesquisaSemestreAtual" style="max-width: 70px; margin-right: 5px;" /> Pesquisa (semestre atual)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="atuacao-profissional" class="tab-pane fade">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" v-model="professor.MembroNDE" id="MembroNDE">
+                            <label class="form-check-label" for="MembroNDE">Membro NDE</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" v-model="professor.MembroColegiado" id="MembroColegiado">
+                            <label class="form-check-label" for="MembroColegiado">Membro Colegiado?</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" v-model="professor.DocenteExperiencia" id="DocenteExperiencia">
+                            <label class="form-check-label" for="DocenteExperiencia">Docente com formação/capacitação/experiência pedagógica?</label>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <h4>** O sistema irá calcular o tempo em anos e meses a partir da diferença com a data atual **</h4>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Tempo de vínculo initerrupto do docente com o curso</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Data inicial</label>
+                                    <input type="text" name="TempoIniterrupto" class="form-control mydate" v-model.lazy="professor.TempoIniterrupto" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tempo total</label>
+                                    <input type="text" name="TempoIniterruptoTotal" class="form-control" v-model.lazy="professor.TempoIniterruptoTotal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Tempo experiência magistério superior</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Data inicial</label>
+                                    <input type="text" name="TempoMagisterio" class="form-control mydate" v-model.lazy="professor.TempoMagisterio" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tempo total</label>
+                                    <input type="text" name="TempoMagisterioTotal" class="form-control" v-model.lazy="professor.TempoMagisterioTotal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Experiência em cursos a distância</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Data inicial</label>
+                                    <input type="text" name="CursoDistancia" class="form-control mydate" v-model.lazy="professor.CursoDistancia" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tempo total</label>
+                                    <input type="text" name="CursoDistancia" class="form-control" v-model.lazy="professor.CursoDistanciaTotal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Tempo experiência profissional</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Data inicial</label>
+                                    <input type="text" name="ExperienciaProfissional" class="form-control mydate" v-model.lazy="professor.ExperienciaProfissional" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Tempo total</label>
+                                    <input type="text" name="ExperienciaProfissional" class="form-control" v-model.lazy="professor.ExperienciaProfissionalTotal" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="publicacoes" class="tab-pane fade">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Artigos publicados em periódicos cientificos</h4>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="NaArea" class="form-control" v-model="professor.NaArea" style="max-width: 70px; margin-right: 5px;" /> Na área (qtde)
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="OutrasAreas" class="form-control" v-model="professor.OutrasAreas" style="max-width: 70px; margin-right: 5px;" /> Em outras áreas (qtde)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Livros ou capítulos</h4>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="LivrosPublicados" class="form-control" v-model="professor.LivrosPublicados" style="max-width: 70px; margin-right: 5px;" /> Livros publicados na área (qtde)
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="OutrosLivrosPublicados" class="form-control" v-model="professor.OutrosLivrosPublicados" style="max-width: 70px; margin-right: 5px;" /> Livros publicados em outras áreas (qtde)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Trabalhos publicados em anais</h4>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="PublicadosAnaisCompleto" class="form-control" v-model="professor.PublicadosAnaisCompleto" style="max-width: 70px; margin-right: 5px;" /> Completos (qtde)
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="PublicadosAnaisResumo" class="form-control" v-model="professor.PublicadosAnaisResumo" style="max-width: 70px; margin-right: 5px;" /> Resumos (qtde)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Propriedade intelectual</h4>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="PropriedadeIntelectualDepositado" class="form-control" v-model="professor.PropriedadeIntelectualDepositado" style="max-width: 70px; margin-right: 5px;" /> Depositado (qtde)
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="PropriedadeIntelectualRegistrada" class="form-control" v-model="professor.PropriedadeIntelectualRegistrada" style="max-width: 70px; margin-right: 5px;" /> Registrada (qtde)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h4>Outras publicações</h4>
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="TraducaoLivros" class="form-control" v-model="professor.TraducaoLivros" style="max-width: 70px; margin-right: 5px;" /> Traduções de livros, capítulos de livros ou artigos publicados (qtde)
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="ProducoesTecnicas" class="form-control" v-model="professor.ProducoesTecnicas" style="max-width: 70px; margin-right: 5px;" /> Projetos e/ou produções técnicas artisticas e culturais (qtde)
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 5px;">
+                                <div class="form-inline">
+                                    <input type="text" name="ProducaoDidaticoPedagogico" class="form-control" v-model="professor.ProducaoDidaticoPedagogico" style="max-width: 70px; margin-right: 5px;" /> Produção didático-pedagógico relevante, publicada ou não (qtde)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

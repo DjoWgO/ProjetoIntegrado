@@ -1,0 +1,2 @@
+F:\Projetos\IESB\PPCWEB\obj\Debug\PPCWEB.csprojAssemblyReference.cache
+F:\Projetos\IESB\PPCWEB\obj\Debug\PPCWEB.csproj.CoreCompileInputs.cache

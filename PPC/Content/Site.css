@@ -1,0 +1,56 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    ul li {
+        margin-bottom: 10px;
+    }
+
+.select2 {
+    
+    height: 25px !important;
+}
+.select2-selection, .select2-selection--multiple {
+  
+    height: 25px !important;
+}
+.select2-selection--single{
+    height: 35px !important;
+}
+
+.select2-container--bootstrap .select2-dropdown {
+    margin-top: 7px !important;
+}
+
+.col-select2{
+    max-width: 390px !important;
+}
+
+.dataTables_filter, .dataTables_info {
+    display: none !important;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select {
+    height: 44px !important;
+}*/

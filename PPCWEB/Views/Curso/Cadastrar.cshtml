@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Cadastro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+
+    <script src="~/Scripts/curso/cursovm.js"></script>
+    <script src="~/Scripts/curso/serviceCurso.js"></script>
+    <script src="~/Scripts/curso/curso.js"></script>
+}
+
+<div class="row" id="app-curso">
+    <div class="col-md-12">
+        <h3>Cadastro de Curso</h3>
+    </div>
+    <form>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Tipo do Curso</label>
+                <select class="form-control" name="tipoCurso" v-model="curso.TipoCurso">
+                    <option v-for="tipo in curso.TiposCursos" v-bind:value="tipo.TipoCursoId">
+                        {{ tipo.Descricao }}
+                    </option>
+
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4  col-select2">
+            <div class="form-group">
+                <label class="control-label">Modalidade</label>
+                <select class="form-control select2-mult" name="modalidade[]" multiple="multiple" id="modalidade">
+                    <option v-for="modalidade in curso.Modalidades" v-bind:value="modalidade.ModalidadeId">
+                        {{ modalidade.Descricao }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Denominação do Curso</label>
+                <input type="text" name="denominacao" class="form-control" v-model="curso.Denominacao" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Habilitação</label>
+                <select class="form-control" name="habilitacao" v-model="curso.Habilitacao">
+                    <option v-for="habilitacao in curso.Habilitacoes" v-bind:value="habilitacao.HabilitacaoId">
+                        {{ habilitacao.Descricao }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4  col-select2">
+            <div class="form-group">
+                <label class="control-label">Local de Oferta</label>
+                <select class="form-control select2-mult" name="localOferta[]" multiple="multiple" id="localOferta">
+                    <option v-for="local in curso.LocaisOferta" v-bind:value="local.LocalOfertaId">
+                        {{ local.Descricao }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4 col-select2">
+                    <div class="form-group">
+                        <label class="control-label">Turnos de Funcionamento</label>
+                        <select class="form-control select2-turnos select2-mult" name="turnoFuncionamento[]" multiple="multiple" id="turnoFuncionamento">
+                            <option v-for="turno in curso.TurnosFuncionamento" v-bind:value="turno.TurnoFuncionamentoId">
+                                {{ turno.Descricao }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4" v-if="lstVagasTurno.length > 0">
+                    <div class="form-group">
+                        <label class="control-label">Número de Vagas por Turno</label>
+                        <ul>
+                            <li v-for="(item, index) in lstVagasTurno">
+                                <input type="text" v-bind:id="'numeroVagasTurno' + item.value" class="form-control" style="max-width: 120px;" v-bind:placeholder="item.text" />
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <h4>Estrutura Curricular</h4>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Regime Letivo</label>
+                <input type="text" name="regimeLetivo" class="form-control" v-model="curso.RegimeLetivo" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Períodos</label>
+                <input type="text" name="periodos" class="form-control" v-model="curso.Periodos" />
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <h4>Coordenador do Curso</h4>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Nome</label>
+                <select class="form-control myselect select2-coordenador" name="NomeCoordenador" id="NomeCoordenador">
+                    <option value="0">-- Selecione --</option>
+                    <option v-for="prof in curso.Professores" v-bind:value="prof.ProfessorId">
+                        {{ prof.Nome }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">CPF</label>
+                <input type="text" name="cpfCoordenador" id="cpfCoordenador" readonly="readonly" class="form-control cpf" v-model.lazy="curso.CPF" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Titulação</label>
+                <input type="text" name="titulacao" class="form-control" id="titulacao" readonly="readonly" v-model.lazy="curso.MaiorTitulacao" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Tempo de dedicação</label>
+                <input type="text" name="tempoDedicacao" class="form-control" id="tempoDedicacao" readonly="readonly"  v-model.lazy="curso.TempoDedicacao" />
+            </div>
+        </div>
+    </form>
+    <div class="col-md-12">
+        <button class="btn btn-primary" disabled="disabled"  v-on:click="salvar()"><i class="fa fa-save"></i> Salvar</button>
+        <button class="btn btn-default" disabled="disabled" ><i class="fa fa-times"></i> Cancelar</button>
+    </div>
+</div>
+
+
